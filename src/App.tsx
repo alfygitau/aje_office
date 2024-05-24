@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, Router } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import Login from "./pages/login/Login";
 import AdminLayout from "./layouts/AdminLayout";
 import TopBar from "./topbar/TopBar";
