@@ -1,7 +1,7 @@
 import Collapsible from "react-collapsible";
 const LeftBar = () => {
   return (
-    <div className="bg-[#2a3163] w-[220px] h-[610px] text-white px-[20px]">
+    <div className="bg-[#2a3163] w-[230px] h-[610px] text-white px-[20px]">
       <p className="flex items-center gap-[10px]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
