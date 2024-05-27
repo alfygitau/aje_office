@@ -36,8 +36,8 @@ const LeftBar = () => {
           />
         </svg>
         <Collapsible trigger="Finance Panel">
-          <div>
-            <p className="flex items-center gap-[10px]">
+          <div className="text-[12px]">
+            <p className="flex items-center  gap-[10px]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -70,7 +70,72 @@ const LeftBar = () => {
                   d="m20 8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9 19H7v-9h2zm4 0h-2v-6h2zm4 0h-2v-3h2zM14 9h-1V4l5 5z"
                 />
               </svg>
-              Reports
+              <Collapsible trigger="Reports">
+                <p className="flex items-center gap-[10px] text-[12px]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 64 64"
+                  >
+                    <path
+                      fill="#d0d1d2"
+                      d="M7.323 58.23c0 3 2.676 5.434 5.985 5.434h38.17c3.303 0 5.985-2.431 5.985-5.434V9.266c0-3-2.683-5.432-5.985-5.432h-38.17c-3.31 0-5.985 2.431-5.985 5.432z"
+                    />
+                    <path
+                      fill="#e7e6e6"
+                      d="M7.323 54.4c0 3 2.676 5.434 5.985 5.434h38.17c3.303 0 5.985-2.433 5.985-5.434V5.435c.001-3-2.682-5.432-5.985-5.432h-38.17c-3.31 0-5.985 2.431-5.985 5.432z"
+                    />
+                    <path
+                      fill="#35494d"
+                      d="M49.919 13.159H15.961c-2.287 0-2.287-3.211 0-3.211h33.958c2.28-.001 2.28 3.211 0 3.211m0 6.518H15.961c-2.287 0-2.287-3.209 0-3.209h33.958c2.28 0 2.28 3.209 0 3.209m0 6.663H15.961c-2.287 0-2.287-3.211 0-3.211h33.958c2.28 0 2.28 3.211 0 3.211m0 6.519H15.961c-2.287 0-2.287-3.212 0-3.212h33.958c2.28 0 2.28 3.212 0 3.212m0 12.581H34.288c-2.277 0-2.277-3.211 0-3.211h15.631c2.28.001 2.28 3.211 0 3.211"
+                    />
+                  </svg>
+                  transaction report
+                </p>
+                <p className="flex items-center gap-[10px] text-[12px]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="m9 22l-1.35-4.55q-1.2-.95-1.925-2.375T5 12t.725-3.075T7.65 6.55L9 2h6l1.35 4.55q1.2.95 1.925 2.375T19 12t-.725 3.075t-1.925 2.375L15 22zm3-5q2.075 0 3.538-1.463T17 12t-1.463-3.537T12 7T8.463 8.463T7 12t1.463 3.538T12 17"
+                    />
+                  </svg>
+                  Daily Report
+                </p>
+                <p className="flex items-center gap-[10px] text-[12px]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M216 56h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a16 16 0 0 0-16 16v128a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V72a16 16 0 0 0-16-16M96 48a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm120 24v41.61A184 184 0 0 1 128 136a184.1 184.1 0 0 1-88-22.38V72Zm0 128H40v-68.36A200.2 200.2 0 0 0 128 152a200.25 200.25 0 0 0 88-20.37zm-112-88a8 8 0 0 1 8-8h32a8 8 0 0 1 0 16h-32a8 8 0 0 1-8-8"
+                    />
+                  </svg>
+                  Betting Report
+                </p>
+                <p className="flex items-center gap-[10px] text-[12px]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M5.516 14.224c-2.262-2.432-2.222-6.244.128-8.611a6.074 6.074 0 0 1 3.414-1.736L8.989 1.8a8.112 8.112 0 0 0-4.797 2.351c-3.149 3.17-3.187 8.289-.123 11.531l-1.741 1.752l5.51.301l-.015-5.834zm6.647-11.959l.015 5.834l2.307-2.322c2.262 2.434 2.222 6.246-.128 8.611a6.07 6.07 0 0 1-3.414 1.736l.069 2.076a8.122 8.122 0 0 0 4.798-2.35c3.148-3.172 3.186-8.291.122-11.531l1.741-1.754z"
+                    />
+                  </svg>
+                  Daily summary
+                </p>
+              </Collapsible>
             </p>
             <p className="flex items-center gap-[10px]">
               <svg
