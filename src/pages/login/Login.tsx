@@ -1,30 +1,70 @@
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { login } from "../../sdk/auth/index";
+import { AxiosError } from "axios";
+import { useAuth } from "../../hooks/useAuth";
 
-const Login = () => {
+
+
+interface LoginFormValues {
+  username: string;
+  password: string;
+}
+
+const Login: React.FC = () => {
+  const [submittingLogin, setSubmittingLogin] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: Yup.object({
-      email: Yup.string().email("Invalid email address").required("Required"),
-      password: Yup.string().required("Required"),
-    }),
-    onSubmit: (values) => {
-      if (
-        values.email === "user@example.com" &&
-        values.password === "password"
-      ) {
-        localStorage.setItem("authenticated", "true");
+  const loginValidationSchema = Yup.object().shape({
+    username: Yup.string().required("Username is required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Password is required"),
+  });
+
+  const handleLogin = async (values: LoginFormValues) => {
+    try {
+      setSubmittingLogin(true);
+      const response = await login({
+        username: values.username,
+        password: values.password,
+      });
+      if (response && response.user) {
+        toast.success("Welcome to Aje bets");
+        setAuth({ user: response.user });
         navigate("/dashboard");
       } else {
-        alert("Invalid credentials");
+        toast.error("Invalid response from server");
       }
+    } catch (error) {
+      console.error(error);
+
+      if (
+        error instanceof AxiosError &&
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("An unexpected error occurred.");
+      }
+    } finally {
+      setSubmittingLogin(false);
+    }
+  };
+
+  const loginFormik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
     },
+    validationSchema: loginValidationSchema,
+    onSubmit: handleLogin,
   });
 
   return (
@@ -32,19 +72,21 @@ const Login = () => {
       <div className="border-1 rounded p-2 w-[50%] h-[400px] px-[20px] bg-[#ffffff] flex flex-col items-center">
         <div className="mt-[60px] w-full">
           <p className="text-lg text-[24px] mb-4 text-center">Sign in</p>
-          <form onSubmit={formik.handleSubmit} className="w-full">
+          <form onSubmit={loginFormik.handleSubmit} className="w-full">
             <div className="mb-4 w-full">
-              <label className="block mb-1 text-[12px]">Email:</label>
+              <label className="block mb-1 text-[12px]">Username:</label>
               <input
                 className="border px-2 py-2 w-full"
-                type="email"
-                name="email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
+                type="text"
+                name="username"
+                onChange={loginFormik.handleChange}
+                onBlur={loginFormik.handleBlur}
+                value={loginFormik.values.username}
               />
-              {formik.touched.email && formik.errors.email ? (
-                <div className="text-red-500">{formik.errors.email}</div>
+              {loginFormik.touched.username && loginFormik.errors.username ? (
+                <div className="text-red-500">
+                  {loginFormik.errors.username}
+                </div>
               ) : null}
             </div>
             <div className="mb-4 w-full">
@@ -53,15 +95,21 @@ const Login = () => {
                 className="border px-2 py-2 w-full"
                 type="password"
                 name="password"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
+                onChange={loginFormik.handleChange}
+                onBlur={loginFormik.handleBlur}
+                value={loginFormik.values.password}
               />
-              {formik.touched.password && formik.errors.password ? (
-                <div className="text-red-500">{formik.errors.password}</div>
+              {loginFormik.touched.password && loginFormik.errors.password ? (
+                <div className="text-red-500">
+                  {loginFormik.errors.password}
+                </div>
               ) : null}
             </div>
-            <button className="text-lg h-10 w-full bg-yellow-500 text-white mx-auto">
+            <button
+              type="submit"
+              disabled={submittingLogin}
+              className="text-lg h-10 w-full bg-yellow-500 text-white mx-auto"
+            >
               Login
             </button>
           </form>

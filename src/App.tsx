@@ -1,8 +1,9 @@
 import "./App.css";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "./pages/login/Login";
 import AdminLayout from "./layouts/AdminLayout";
 import TopBar from "./topbar/TopBar";
+import RequireAuth from "./layouts/RequireAuth";
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Route>
         <Route path="/admin" element={<AdminLayout />}>
-          <Route path="/admin/topbar" element={<TopBar />} />
+          <Route element={<RequireAuth />}>
+            <Route path="/admin/topbar" element={<TopBar />} />
+          </Route>
         </Route>
       </Routes>
     </>
